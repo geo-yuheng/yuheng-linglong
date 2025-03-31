@@ -3,7 +3,7 @@
     "endpoint":"%%ENDPOINT(osm-dev)%%",
     "changeset_tags":{
         "created_by": "%%UA_LINGLONG%% framework/(%%UA_OSMAPI%%) %%PROJECT_URL%%",
-        "comment": "是可爱的鼠宝宝 | %%TIME%%}"
+        "comment": "是可爱的鼠宝宝 | %%TIME%%"
     },
     "task_file":"data.csv",
     "task_format":"action_csv"

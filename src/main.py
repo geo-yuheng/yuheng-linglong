@@ -20,7 +20,7 @@ from yuheng_osmapi.core_element import (
     element_update,
 )
 from yuheng_osmapi.oauth import oauth_login
-from yuheng_osmapi.tools import get_version_from_world, parse_result
+from yuheng_osmapi.tools import get_attribute_from_world, parse_result
 
 
 class Task:
@@ -123,22 +123,43 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                 element_type="node",
                 element_id=action["ID"],
             )
-            element_version = get_version_from_world(
-                parse_result(element_xml_text).node_dict
+            element_version = get_attribute_from_world(
+                parse_result(element_xml_text).node_dict, attribute="version"
+            )
+            if action["TYPE"] == "node":
+                node_lat=get_attribute_from_world(
+                parse_result(element_xml_text).node_dict, attribute="lat"
+            )
+                node_lon=get_attribute_from_world(
+                parse_result(element_xml_text).node_dict, attribute="lon"
             )
             logger.debug(f"element_version = {element_version}")
 
             # TEST: update element
 
-            element_update(
-                endpoint=toy.endpoint,
-                access_token=access_token,
-                changeset_id=changeset_id,
-                element_type=action["TYPE"],
-                element_id=action["ID"],
-                element_version=element_version,
-                data=action["DATA"],
-            )
+            if action["TYPE"] == "node":
+                element_update(
+                    endpoint=toy.endpoint,
+                    access_token=access_token,
+                    changeset_id=changeset_id,
+                    element_type=action["TYPE"],
+                    element_id=action["ID"],
+                    element_version=element_version,
+                    data=action["DATA"],
+                    node_lat=node_lat,
+                    node_lon=node_lon
+                )
+            else:
+
+                element_update(
+                    endpoint=toy.endpoint,
+                    access_token=access_token,
+                    changeset_id=changeset_id,
+                    element_type=action["TYPE"],
+                    element_id=action["ID"],
+                    element_version=element_version,
+                    data=action["DATA"],
+                )
         if action["ACTION"] == "delete":
             # delete = read + delete
 
@@ -150,21 +171,40 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                 element_type="node",
                 element_id=action["ID"],
             )
-            element_version = get_version_from_world(
-                parse_result(element_xml_text).node_dict
+            element_version = get_attribute_from_world(
+                parse_result(element_xml_text).node_dict, attribute="version"
+            )
+            if action["TYPE"] == "node":
+                node_lat=get_attribute_from_world(
+                parse_result(element_xml_text).node_dict, attribute="lat"
+            )
+                node_lon=get_attribute_from_world(
+                parse_result(element_xml_text).node_dict, attribute="lon"
             )
             logger.debug(f"element_version = {element_version}")
 
             # TEST: delete element
 
-            element_delete(
-                endpoint=toy.endpoint,
-                access_token=access_token,
-                changeset_id=changeset_id,
-                element_type=action["TYPE"],
-                element_id=action["ID"],
-                element_version=element_version,
-            )
+            if action["TYPE"] == "node":
+                element_delete(
+                    endpoint=toy.endpoint,
+                    access_token=access_token,
+                    changeset_id=changeset_id,
+                    element_type=action["TYPE"],
+                    element_id=action["ID"],
+                    element_version=element_version,
+                    node_lon=node_lon,
+                    node_lat=node_lat
+                )
+            else:
+                element_delete(
+                    endpoint=toy.endpoint,
+                    access_token=access_token,
+                    changeset_id=changeset_id,
+                    element_type=action["TYPE"],
+                    element_id=action["ID"],
+                    element_version=element_version,
+                )
 
 
 @logger.catch(level="CRITICAL")
