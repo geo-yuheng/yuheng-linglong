@@ -5,8 +5,6 @@ from typing import Optional, Union
 import yuheng
 from yuheng import logger
 from yuheng.method.network import get_endpoint_api
-
-from magic import is_there_magic_word, magic_replace, magic_transform
 from yuheng_osmapi.core_changeset import (
     changeset_close,
     changeset_create,
@@ -21,6 +19,8 @@ from yuheng_osmapi.core_element import (
 )
 from yuheng_osmapi.oauth import oauth_login
 from yuheng_osmapi.tools import get_attribute_from_world, parse_result
+
+from magic import is_there_magic_word, magic_replace, magic_transform
 
 
 class Task:
@@ -111,6 +111,8 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                 changeset_id=changeset_id,
                 element_type=action["TYPE"],
                 data=action["DATA"],
+                node_lat=action["LAT"],
+                node_lon=action["LON"],
             )
         if action["ACTION"] == "modify":
             # modify = read + update
@@ -127,12 +129,12 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                 parse_result(element_xml_text).node_dict, attribute="version"
             )
             if action["TYPE"] == "node":
-                node_lat=get_attribute_from_world(
-                parse_result(element_xml_text).node_dict, attribute="lat"
-            )
-                node_lon=get_attribute_from_world(
-                parse_result(element_xml_text).node_dict, attribute="lon"
-            )
+                node_lat = get_attribute_from_world(
+                    parse_result(element_xml_text).node_dict, attribute="lat"
+                )
+                node_lon = get_attribute_from_world(
+                    parse_result(element_xml_text).node_dict, attribute="lon"
+                )
             logger.debug(f"element_version = {element_version}")
 
             # TEST: update element
@@ -147,7 +149,7 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                     element_version=element_version,
                     data=action["DATA"],
                     node_lat=node_lat,
-                    node_lon=node_lon
+                    node_lon=node_lon,
                 )
             else:
 
@@ -175,12 +177,12 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                 parse_result(element_xml_text).node_dict, attribute="version"
             )
             if action["TYPE"] == "node":
-                node_lat=get_attribute_from_world(
-                parse_result(element_xml_text).node_dict, attribute="lat"
-            )
-                node_lon=get_attribute_from_world(
-                parse_result(element_xml_text).node_dict, attribute="lon"
-            )
+                node_lat = get_attribute_from_world(
+                    parse_result(element_xml_text).node_dict, attribute="lat"
+                )
+                node_lon = get_attribute_from_world(
+                    parse_result(element_xml_text).node_dict, attribute="lon"
+                )
             logger.debug(f"element_version = {element_version}")
 
             # TEST: delete element
@@ -194,7 +196,7 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                     element_id=action["ID"],
                     element_version=element_version,
                     node_lon=node_lon,
-                    node_lat=node_lat
+                    node_lat=node_lat,
                 )
             else:
                 element_delete(

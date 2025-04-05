@@ -4,9 +4,9 @@ from typing import Union
 
 from yuheng import logger
 from yuheng.method.network import get_endpoint_api
+from yuheng_osmapi.const import UA as UA_osmapi
 
 from const import PROJECT_URL, UA
-from yuheng_osmapi.const import UA as UA_osmapi
 
 
 def magic_transform(magic_word: str) -> str:

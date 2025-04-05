@@ -1,2 +1,2 @@
-ACTION,TYPE,ID,DATA
-create,node,0,{"sno":"2001"&#44;"sna":"中央大學圖書館"&#44;"tot":"14"&#44;"sbi":"8"&#44;"sarea":"中壢區"&#44;"mday":"20240807014340"&#44;"lat":"24.968128"&#44;"lng":"121.194666"&#44;"ar":"中大路300號(中央大學校內圖書館前)"&#44;"sareaen":"Zhongli Dist."&#44;"snaen":"National Central University Library"&#44;"aren":"No.300&#44; Zhongda Rd."&#44;"bemp":"6"&#44;"act":"1"}
+ACTION,TYPE,LAT,LON,ID,DATA
+create,node,24.968128,121.194666,0,{"amenity":"bicycle_rental"&#44;"brand":"YouBike 2.0"&#44;"brand:wikidata":"Q20687952"&#44;"bicycle_rental":"docking_station"&#44;"name":"中央大學圖書館"&#44;"addr:full":"中大路300號(中央大學校內圖書館前)"&#44;"name:en":"National Central University Library"}
