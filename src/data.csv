@@ -1,2 +1,2 @@
 ACTION,TYPE,LAT,LON,ID,DATA
-create,node,24.968128,121.194666,0,{"amenity":"bicycle_rental"&#44;"brand":"YouBike 2.0"&#44;"brand:wikidata":"Q20687952"&#44;"bicycle_rental":"docking_station"&#44;"name":"中央大學圖書館"&#44;"addr:full":"中大路300號(中央大學校內圖書館前)"&#44;"name:en":"National Central University Library"}
+modify,node,24.968128,121.194666,4359497021,{"amenity":"bicycle_rental"&#44;"brand":"YouBike %%TIME%%.114514"&#44;"brand:wikidata":"Q114514"&#44;"bicycle_rental":"docking_station"&#44;"name":"大兴发中央大學圖書館"&#44;"addr:full":"中大路300號(中央大學校內圖書館前)"&#44;"name:en":"National Central University Library"&#44;"%%MAGIC_SCRIPT%%":"TRANSFER(\"branch\"<-\"name\".regex(\"^大兴发(.*?)$\"));TRANSFER();TRANSFER(\"name:en\"->None);DELETE(\"brand:wikidata\")"}
