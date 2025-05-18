@@ -137,6 +137,11 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
                 )
             logger.debug(f"element_version = {element_version}")
 
+            # IF NEED TAG ETL
+
+            for k, v in action["DATA"].items():
+                logger.warning((k,v))
+
             # TEST: update element
 
             if action["TYPE"] == "node":

@@ -12,6 +12,7 @@ from const import PROJECT_URL, UA
 def magic_transform(magic_word: str) -> str:
     """
     转换指定的玲珑魔法字到指定的python变量值
+    找不到的时候返回原内容
     """
     dict = {
         "%%TIME%%": str(time.time()),
@@ -22,7 +23,7 @@ def magic_transform(magic_word: str) -> str:
         "%%ENDPOINT(osm)%%": get_endpoint_api("osm"),
         "%%ENDPOINT(ogf)%%": get_endpoint_api("ogf"),
     }
-    return dict.get(magic_word, "")
+    return dict.get(magic_word, magic_word.replace("%%",""))
 
 
 def is_there_magic_word(uncertain_value) -> Union[str, bool]:
