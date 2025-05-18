@@ -33,7 +33,7 @@ def is_there_magic_word(uncertain_value) -> Union[str, bool]:
     """
     import re
 
-    result = re.findall(pattern=r"%%.*?%%", string=uncertain_value)
+    result = re.findall(pattern=r"%%(?!MAGIC_SCRIPT%%).*?%%", string=uncertain_value)
     logger.trace(result)
     if result != []:
         return result[0]
