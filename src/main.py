@@ -139,8 +139,8 @@ def conduct_action(toy: Task, access_token: str, changeset_id: str):
 
             # IF NEED TAG ETL
             
-            # 使用 magic.py 中的函数处理 magic script
-            from magic import process_magic_script
+            # 使用 magic 模块中的函数处理 magic script
+            from magic.script import process_magic_script
             action["DATA"] = process_magic_script(action["DATA"])
 
             # TEST: update element
