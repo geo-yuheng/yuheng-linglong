@@ -224,7 +224,12 @@ def main():
 
     # 登录获得token（所有api操作使用，有时间限制）
 
-    access_token = oauth_login()
+    access_token = oauth_login(
+        redirect_uri="urn:ietf:wg:oauth:2.0:oob",
+        client_id="1lMl1Wdv8GRAGqtB9ptzaWqxdvWkee6Jsf6xwD8oeoE",
+        client_secret="",
+        endpoint_api=get_endpoint_api("osm-dev"),
+    )
 
     # 登录之后的操作
 
